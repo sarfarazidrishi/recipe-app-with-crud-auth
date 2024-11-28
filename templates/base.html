@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Faraz app</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'vege:recipes'%}">SUPER Suppers </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'vege:recipes'%}">Home</a>
+            </li>
+            {% if user.is_authenticated%}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:logout'%}">logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item ml-5">
+              <a class="nav-link" href="{%url 'accounts:login'%}">Login</a>
+            </li>
+            <li class="nav-item ml-5">
+              <a class="nav-link" href="{%url 'accounts:register'%}">Register</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+  {% comment %} <<this code was used earlier later i addes a navbar, that u see above>>
+  <div class="container mx-flex">
+    <a href="{% url 'vege:recipes'%}">home</a> 
+    {% comment %} {{request.user}}  <<this can be used to print username on html pages
+
+    {%if user.is_authenticated%}
+    <a href="{% url 'accounts:logout'%}">logout</a> 
+    <p>hello {{user.first_name}}</p>
+    <img src="{{user.profileimg}}" alt="profile image">
+
+    {%else%}
+    <a href="{% url 'accounts:login'%}">login</a>
+    <a href="{% url 'accounts:register' %}">register</a>
+    {%endif%}
+  </div> 
+  {% endcomment %} 
+    {% block start%} 
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block start%}
+
+<div class="container"><h1>sign up</h1></div>
+<form method='POST' enctype="multipart/form-data">
+ {% csrf_token %}
+ <div class="container mt-2 mx-auto card w-75">
+
+  <div class="mb-2"> <!--profile image-->
+    <label for="profileimg" class="form-label">profile image</label>
+    <input type="file" class="form-control" id="profileimg" placeholder="Faraz", name="profileimg">
+  </div>
+
+  
+  <div class="mb-2"> <!--first name-->
+    <label for="first_name" class="form-label">first name</label>
+    <input type="text" class="form-control" id="first_name" placeholder="Faraz", name="first_name" required>
+  </div>
+  
+  <div class="mb-2"> <!--last name-->
+    <label for="last_name" class="form-label">last name</label>
+    <input type="text" class="form-control" id="last_name" placeholder="idrishi", name="last_name" required>
+  </div>
+
+  <div class="mb-2"> <!--email-->
+    <label for="email" class="form-label">email</label>
+    <input type="email" class="form-control" id="email" placeholder="faraz@email.duck.com", name="email" required>
+    {%if errors.email_error%}
+    <div class="alert alert-danger form-control-sm" role="alert">
+      <small>{{errors.email_error}}</small>
+    </div>
+    {% endif %}
+  </div>
+
+   <div class="mb-2"> <!--username-->
+     <label for="username" class="form-label">user name</label>
+     <input type="text" class="form-control" id="username" placeholder="faraz178", name="username" required>
+     {%if errors.username_error%}
+     <div class="alert alert-danger form-control-sm" role="alert">
+      <small>{{errors.username_error}}</small>
+    </div>
+    {% endif %}
+   </div>
+
+   <div class="mb-2"> <!--password-->
+     <label for="password" class="form-label">password</label>
+     <input type="password" class="form-control" id="password" name="password" required>
+     {%if errors.password_error%}
+     <div class="alert alert-danger form-control-sm w-25 h-25" role="alert">
+      <small>{{errors.password_error}}</small>
+    </div>
+     {% endif %}
+   </div>
+
+   <div class="mb-2"> <!-- confirm password-->
+    <label for="confirm_password" class="form-label">confirm password</label>
+    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+  </div>
+
+
+   <button type="submit" class="btn btn-secondary w-25">register</button>
+   <p>already have an account <a href="{% url 'accounts:login' %}">login now</a></p>
+ </div>
+</form>
+
+
+
+{% endblock %}

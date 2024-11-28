@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block start%}
+
+<div class="container"><h1>Recipe App</h1></div>
+<form method='POST' enctype="multipart/form-data">
+ {% csrf_token %}
+ <div class="container mt-2 mx-auto card w-75">
+   <div class="mb-2">
+     <label for="recipe_title" class="form-label">Title of Recipe</label>
+     <input type="text" class="form-control" value="{{recipe.recipe_title}}" id="recipe_title" placeholder="kawab biryani", name="recipe_title" required>
+   </div>
+   <div class="mb-2">
+     <label for="recipe_description" class="form-label">Recipe Description</label>
+     <textarea class="form-control" value="" id="recipe_description" rows="3" name="recipe_description" required>{{recipe.recipe_description}}</textarea>
+   </div>
+   <div class="mb-2">
+     <label for="recipeImg" class="form-label">Recipe image</label>
+     <input type="file" class="form-control" name="recipeImg">
+   </div>
+   <button type="submit" class="btn btn-secondary w-25">Update</button>
+ </div>
+</form>
+{% endblock %}

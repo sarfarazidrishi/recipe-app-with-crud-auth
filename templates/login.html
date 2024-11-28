@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block start%}
+
+<div class="container"><h1>login</h1></div>
+<form method='POST' enctype="multipart/form-data">
+ {% csrf_token %}
+ <div class="container mt-2 mx-auto card w-75">
+   <div class="mb-2">
+     <label for="username" class="form-label">user name</label>
+     <input type="text" class="form-control" id="username" placeholder="faraz178", name="username" required>
+   </div>
+   <div class="mb-2">
+     <label for="password" class="form-label">password</label>
+     <input type="password" class="form-control" id="password" rows="3" name="password" required>
+   </div>
+   <button type="submit" class="btn btn-secondary w-25">login</button>
+   <p>Don't have a account, <a href="{% url 'accounts:register' %}">register here</a></p>
+ </div>
+</form>
+{%if errors.userNOT_exists%}
+<h3>{{errors.userNOT_exists}} user does't exist ...please signup</h3>
+{% endif %}
+
+{% endblock %}

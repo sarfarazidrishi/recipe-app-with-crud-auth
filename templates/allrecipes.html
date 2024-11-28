@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block start%}
+
+<form>
+    <div class="container mb-1">
+      <div class="mx-auto col-4">
+        <label for="search" class="form-label"></label>
+        <div class="d-flex">
+          <input id="search" class="form-control form-control-sm me-2" name="search" placeholder="search recipe here">
+          <button type="submit" class="btn btn-primary btn-sm" style="display:inline"> Search</button>
+        </div>
+      </div>
+    </div>
+</form>
+
+<div class="container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; width: 100%; margin: 0 auto;  align-items: start;">
+{%for a_recipe in allrecipes%}
+ <div class="card border-primary m-1" style="padding:10px; break-inside:avoid; height:auto; display: block;">
+     <img src="{{a_recipe.recipeImg.url}}" class="card-img-top" alt="kr le solve error mubashshira teri(fix this)">
+     <div class="card-body">
+         <h5 class="card-title">{{a_recipe.recipe_title}}</h5>
+         <p class="card-text">{{a_recipe.recipe_description|truncatewords:25}}</p>
+         <a href="#" class="btn btn-primary">Lets Cook</a>
+     </div>
+ </div>
+{%endfor%}
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block start%}
+
+<form>
+<div class="container mb-1">
+  <div class="mx-auto col-4">
+    <label for="search" class="form-label"></label>
+    <div class="d-flex">
+      <input id="search" class="form-control form-control-sm me-2" name="search" placeholder="search recipe here">
+      <button type="submit" class="btn btn-primary btn-sm" style="display:inline"> Search</button>
+    </div>
+  </div>
+</div>
+</form>
+
+<form method='POST' enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="container mx-auto card w-50">
+    <h5>Add Recipe</h5>
+   <div class="">
+     <label for="recipe_title" class="form-label">Title of Recipe</label>
+     <input type="text" class="form-control" id="recipe_title" placeholder="kawab biryani", name="recipe_title" required>
+   </div>
+   <div class="">
+     <label for="recipe_description" class="form-label">Recipe Description</label>
+     <textarea class="form-control mt-0" id="recipe_description" name="recipe_description" required></textarea>
+   </div>
+   <div class="">
+     <label for="recipeImg" class="form-label">Recipe image</label>
+     <input type="file" class="form-control" name="recipeImg">
+   </div>
+   <button type="submit" class="btn btn-secondary w-25 mt-1 mb-1 mx-auto" {%if not user.is_authenticated%} disabled {%endif%}>Add Recipe</button>
+ </div>
+</form>
+
+{% comment %} {% url 'vege:recipes'%} {% endcomment %}
+<div class=container><a href="{%url 'vege:allrecipes' %}">view all recipes</a></div>
+
+<table class="table w-75 mx-auto mb-2">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Recipe name</th>
+      <th scope="col">Recipe Description</th>
+      <th scope="col">image</th>
+      <th scope="cols">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for recipe in recipes%}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{recipe.recipe_title}}</td>
+      <td>{{recipe.recipe_description|truncatewords:50}}</td>
+      <td><img src="media/{{recipe.recipeImg}}" style="width: 150px; height: 80px"></td>
+      <td><a href="/delete_recipe/{{recipe.id}}/" class="btn btn-danger">Delete</a></td>
+      <td><a href="/update_recipe/{{recipe.id}}/" class="btn btn-secondary">update</a></td>
+    </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
